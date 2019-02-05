@@ -1,9 +1,7 @@
-import pandas as pd
-import numpy as np
+import psutil
 
-df = pd.DataFrame([[1,2],[3,4]], columns=['A','B'])
+ls_OpenedWindows = [item.name() for item in psutil.process_iter() \
+                    if 'Code.exe' in item.name() or 'Qv.exe' in item.name()]
 
-print(df)
-print(df.head(1))
-
-print('test')
+ls_OpenedWindows = np.unique(ls_OpenedWindows)
+len(ls_OpenedWindows)
