@@ -16,8 +16,8 @@ for i in ls:
     txt = txt + i + '\n'
 
 # Create the application window
-window = tk.Tk()
- 
+window = tk.Tk(className=' My Activities')
+
 # Create the user interface
 my_label = ttk.Label(window, text=txt)
 my_label.grid(row=1, column=2)
