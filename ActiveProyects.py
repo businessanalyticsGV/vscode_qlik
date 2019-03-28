@@ -1,19 +1,36 @@
 import tkinter as tk
 from tkinter import ttk
+import pandas as pd
 import os
 
 ls_toAvoid = ['__','.i','00']
 work = 'C:/Users/alexisalvarez/OneDrive - Grupo Vidanta/UPDATE/Work'
 proyect = 'C:/Users/alexisalvarez/OneDrive - Grupo Vidanta/UPDATE/Proyects'
 
-work = ['work'+f for f in os.listdir(work) if f[:2] not in ls_toAvoid]
-proyect = ['proy'+f for f in os.listdir(proyect) if f[:2] not in ls_toAvoid]
-
+work = ['WORK-'+f for f in os.listdir(work) if f[:2] not in ls_toAvoid]
+proyect = ['PROY-'+f for f in os.listdir(proyect) if f[:2] not in ls_toAvoid]
+ 
 ls = work+proyect
 
-txt = ''
+txt = []
 for i in ls:
-    txt = txt + i + '\n'
+    comp = 'COMPLETED'
+    proc = 'INPROCESS'
+    if i[-len(comp):] == comp:
+        txt.append((i[:len(i)-len(comp)-3],comp,0))
+    elif i[-len(proc):] == proc:
+        txt.append((i[:len(i)-len(proc)-3],proc,2))
+    else:
+        txt.append((i,'PENDING',1))
+
+df = pd.DataFrame(txt,columns = ['name','status','order'])
+df = df.sort_values(by = 'order', ascending = False)
+
+txt = ''
+for i in range(df.shape[0]):
+    name = df.iloc[i][0]
+    stat = df.iloc[i][1]
+    txt = txt + stat + ' ' + name + '\n'
 
 # Create the application window
 window = tk.Tk(className=' My Activities')
