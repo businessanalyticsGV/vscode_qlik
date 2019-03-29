@@ -42,14 +42,7 @@ def Ventanita():
     my_label = ttk.Label(window, text=txt)
     my_label.grid(row=1, column=2)
     my_label.pack()
-
-    def close_win():
-        window.destroy()
-
-    button = tk.Button(my_label,text='Update',command=close_win)
-    button.pack(side=tk.LEFT)
-
-    Button(window,text='Update',command = close_win)
+    
     # Start the GUI event loop
     window.mainloop()
     
