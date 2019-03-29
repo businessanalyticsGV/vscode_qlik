@@ -24,7 +24,7 @@ def Ventanita():
         elif i[-len(proc):] == proc:
             txt.append((i[:len(i)-len(proc)-3],proc,2))
         else:
-            txt.append((i,'PENDING   ',1))
+            txt.append((i,'PENDING      ',1))
 
     df = pd.DataFrame(txt,columns = ['name','status','order'])
     df = df.sort_values(by = 'order', ascending = False)
